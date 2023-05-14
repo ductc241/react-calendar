@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+html,
+body,
+#root {
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+  // font-family: "Poppins", sans-serif;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+.container {
+  height: 100%;
+  padding: 15px 100px;
+}
+
+.calendar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  border: 2px solid #eaecef;
+  border-radius: 10px;
+
+  &-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-bottom: 2px solid #eaecef;
+
+    &-item {
+      padding: 15px 0px;
+
+      &:last-child {
+        border-right: none;
+      }
+
+      p {
+        text-align: center;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  &-week {
+    flex-grow: 1;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    background-color: #fafcfe;
+
+    &-item {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      border-bottom: 2px solid #eaecef;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .calendar-day:last-child {
+        border-right: none;
+      }
+    }
+  }
+
+  &-day {
+    font-size: 14px;
+    padding: 10px 8px;
+    border-right: 2px solid #eaecef;
+
+    &-header {
+      display: flex;
+      justify-content: center;
+      font-weight: 700;
+      text-align: right;
+      margin-bottom: 10px;
+
+      .other-month {
+        color: #a4a9b7;
+      }
+
+      .current-month {
+        color: #020204;
+      }
+
+      .current-day {
+        color: red;
+      }
+    }
+
+    &-content {
+      overflow: hidden;
+      border-radius: 5px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+      .event {
+        position: relative;
+        padding: 5px 20px;
+        background-color: white;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 7px;
+          left: 6px;
+          bottom: 7px;
+          width: 5px;
+          background-color: #ff5730;
+          border-radius: 5px;
+        }
+
+        &-title {
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+
+          font-weight: 600;
+          color: #343b46;
+        }
+      }
+    }
+  }
+}
