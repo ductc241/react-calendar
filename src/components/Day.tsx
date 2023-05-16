@@ -1,13 +1,30 @@
 import clsx from "clsx";
 import moment from "moment";
+import { useContext, MouseEvent } from "react";
+import GlobalContext from "../context";
+import Event from "./Events";
 
 interface IDayProps {
   day: moment.Moment;
 }
 
 const Day = ({ day }: IDayProps) => {
+  const globalContext = useContext(GlobalContext);
+  const eventOfDay = globalContext?.eventStore.filter(event =>
+    moment(day.format("YYYY-MM-DD")).isSame(event.start_date),
+  );
+
+  const handleCreateEvent = (e: MouseEvent<HTMLDivElement>) => {
+    // console.log(e.currentTarget, e.target);
+    console.log("click day");
+  };
+
+  const handleShowEvent = () => {
+    console.log("show event");
+  };
+
   return (
-    <div className="calendar-day">
+    <div className="calendar-day" onClick={e => handleCreateEvent(e)}>
       <div className="calendar-day-header">
         <p
           className={clsx(
@@ -18,15 +35,14 @@ const Day = ({ day }: IDayProps) => {
           {day.date()}
         </p>
       </div>
-      <div className="calendar-day-content">
-        <div className="event">
-          <p className="event-title">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit fugiat iste reiciendis
-            sit. Debitis quis quod, dolorum numquam fugiat eveniet iste pariatur ab accusamus unde,
-            excepturi velit assumenda cum voluptatibus!
-          </p>
-        </div>
-      </div>
+
+      {/* <div className="calendar-day-content">
+        {eventOfDay?.map((event, index) => (
+          <Event key={index} />
+        ))}
+
+        {eventOfDay && eventOfDay?.length >= 2 && <p className="event-more">+1 More</p>}
+      </div> */}
     </div>
   );
 };

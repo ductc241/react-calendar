@@ -44,9 +44,15 @@ h6 {
   overflow-wrap: break-word;
 }
 
+@keyframes example {
+  50% {
+    background-color: yellow;
+  }
+}
+
 .container {
-  height: 100%;
-  padding: 15px 100px;
+  // height: 100%;
+  padding: 15px;
 }
 
 .calendar {
@@ -56,6 +62,7 @@ h6 {
 
   border: 2px solid #eaecef;
   border-radius: 10px;
+  overflow: hidden;
 
   &-header {
     display: grid;
@@ -76,24 +83,99 @@ h6 {
     }
   }
 
-  &-week {
+  &-month {
     flex-grow: 1;
     display: grid;
-    grid-template-rows: repeat(5, 1fr);
+    // grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 215px);
     background-color: #fafcfe;
+  }
 
-    &-item {
+  &-week {
+    position: relative;
+  }
+
+  &-event {
+    &-container {
+      position: absolute;
+      top: 41px;
+      right: 0;
+      left: 0;
+      bottom: 0;
+
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      border-bottom: 2px solid #eaecef;
+      column-gap: 4px;
+    }
 
-      &:last-child {
-        border-bottom: none;
-      }
+    &-cell {
+      position: relative;
 
-      .calendar-day:last-child {
-        border-right: none;
+      .event {
+        position: absolute;
+        left: 0;
+        cursor: pointer;
+        z-index: 100;
+
+        &:hover .event-container::before {
+          // animation: changelabelColor 1s infinite;
+          animation: example 0.5s infinite;
+        }
+
+        &-container {
+          position: relative;
+          padding: 5px 20px;
+          border-radius: 5px;
+          background-color: white;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 7px;
+            left: 6px;
+            bottom: 7px;
+            width: 5px;
+            background-color: #ff5730;
+            border-radius: 5px;
+          }
+        }
+
+        &-title {
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+
+          font-weight: 600;
+          color: #343b46;
+
+          span {
+            display: inline-block;
+            margin-right: 10px;
+            color: #a4a9b7;
+          }
+        }
+
+        &-more {
+          font-weight: 600;
+        }
       }
+    }
+  }
+
+  &-day-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-bottom: 2px solid #eaecef;
+    height: 100%;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .calendar-day:last-child {
+      border-right: none;
     }
   }
 
@@ -109,6 +191,11 @@ h6 {
       text-align: right;
       margin-bottom: 10px;
 
+      &:hover {
+        background-color: #f2f2f2;
+        cursor: pointer;
+      }
+
       .other-month {
         color: #a4a9b7;
       }
@@ -123,36 +210,7 @@ h6 {
     }
 
     &-content {
-      overflow: hidden;
-      border-radius: 5px;
-      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
-      .event {
-        position: relative;
-        padding: 5px 20px;
-        background-color: white;
-
-        &::before {
-          content: "";
-          position: absolute;
-          top: 7px;
-          left: 6px;
-          bottom: 7px;
-          width: 5px;
-          background-color: #ff5730;
-          border-radius: 5px;
-        }
-
-        &-title {
-          display: -webkit-box;
-          -webkit-line-clamp: 1;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-
-          font-weight: 600;
-          color: #343b46;
-        }
-      }
+      position: relative;
     }
   }
 }

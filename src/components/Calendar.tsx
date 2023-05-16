@@ -19,6 +19,7 @@ const Calendar = () => {
             );
           })}
         </div>
+
         <Month dayOfCalendar={globalContext?.dayOfCalendar} />
       </div>
     </div>
