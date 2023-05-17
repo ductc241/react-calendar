@@ -14,6 +14,12 @@ const eventDefault: IEvent[] = [
     end_date: "2023-05-01",
     label: "blue",
   },
+  {
+    title: "🚄 Go to Ho Chi Minh City",
+    start_date: "2023-05-03",
+    end_date: "2023-05-05",
+    label: "blue",
+  },
 
   {
     title: "🛒Buy food for diner",
@@ -22,19 +28,19 @@ const eventDefault: IEvent[] = [
     label: "blue",
   },
   {
-    title: "Google meet",
+    title: "📷 Google meet",
     start_date: "2023-05-03",
     end_date: "2023-05-03",
     label: "blue",
   },
   {
     title: "Relaxing",
-    start_date: "2023-05-03",
+    start_date: "2023-05-02",
     end_date: "2023-05-05",
     label: "blue",
   },
   {
-    title: "🛒 Live in my friend's home",
+    title: "🏡 Live in my friend's home",
     start_date: "2023-05-02",
     end_date: "2023-05-04",
     label: "blue",

@@ -1,4 +1,4 @@
-import { memo, useContext } from "react";
+import { memo } from "react";
 import moment from "moment";
 import Day from "./Day";
 import EventGrid from "./Event/EventGrid";
