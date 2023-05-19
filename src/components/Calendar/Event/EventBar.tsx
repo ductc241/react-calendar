@@ -1,5 +1,5 @@
-import { MouseEvent } from "react";
-import IEvent from "../interfaces/event.interface";
+import { MouseEvent, DragEvent } from "react";
+import IEvent from "../../../interfaces/event.interface";
 import moment from "moment";
 
 interface IEventProps {
@@ -7,20 +7,28 @@ interface IEventProps {
   eventList: IEvent[];
 }
 
-const Event = ({ event, eventList }: IEventProps) => {
+const EventBar = ({ event, eventList }: IEventProps) => {
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     console.log("show event detail");
   };
 
   const orderEvent = eventList.findIndex(x => x.title === event.title);
+  // ⚠ dont use title to filter event, use id to handle this
+
   const totalDayOfEvent = moment(event.end_date).diff(moment(event.start_date), "days") + 1;
+
+  const handleDragStart = (e: DragEvent<HTMLDivElement>, event: IEvent) => {
+    e.dataTransfer.setData("eventDrag", JSON.stringify(event));
+  };
 
   return (
     <div
       className="event"
       onClick={e => handleClick(e)}
       style={{ top: `${orderEvent * 44}px`, width: `calc(${100 * totalDayOfEvent}%)` }}
+      draggable
+      onDragStart={e => handleDragStart(e, event)}
     >
       <div className="event-container">
         <p className="event-title">{event.title}</p>
@@ -29,4 +37,4 @@ const Event = ({ event, eventList }: IEventProps) => {
   );
 };
 
-export default Event;
+export default EventBar;

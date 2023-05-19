@@ -61,9 +61,10 @@ const eventDefault: IEvent[] = [
 
 function GlobalContextProvider({ children }: IGlobalProps) {
   const [currentMonth, setCurrentMonth] = useState<number>(moment().month());
-  const eventStore: IEvent[] = JSON.parse(
-    localStorage.getItem("events") ?? JSON.stringify(eventDefault),
-  );
+  // const eventStore: IEvent[] = JSON.parse(
+  //   localStorage.getItem("events") ?? JSON.stringify(eventDefault),
+  // );
+  const [eventStore, setEventStore] = useState<IEvent[]>(eventDefault);
 
   const dayOfCalendar = useMemo(() => {
     const nestedArrays: any[] = [...Array(5)].map(() => []);
@@ -82,6 +83,24 @@ function GlobalContextProvider({ children }: IGlobalProps) {
     return nestedArrays;
   }, [currentMonth]);
 
+  const handleChangeDateEvent = (event: IEvent, day: moment.Moment) => {
+    if (event.start_date === event.end_date) {
+      const newEventList = eventStore.map(e => {
+        if (e.title === event.title) {
+          return {
+            ...event,
+            start_date: day.format("YYYY-MM-DD"),
+            end_date: day.format("YYYY-MM-DD"),
+          };
+        }
+
+        return e;
+      });
+
+      setEventStore(newEventList);
+    }
+  };
+
   return (
     <GlobaContext.Provider
       value={{
@@ -89,6 +108,7 @@ function GlobalContextProvider({ children }: IGlobalProps) {
         setCurrentMonth,
         dayOfCalendar,
         eventStore,
+        handleChangeDateEvent,
       }}
     >
       {children}

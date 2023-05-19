@@ -10,6 +10,8 @@ const Day = ({ day }: IDayProps) => {
     console.log("click day");
   };
 
+  console.log("render day");
+
   return (
     <div className="calendar-day" onClick={e => handleCreateEvent(e)}>
       <div className="calendar-day-header">

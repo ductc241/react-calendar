@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import Month from "./Month";
-import GlobalContext from "../context";
+import GlobalContext from "../../context";
 
 const dayInWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 const Calendar = () => {
-  const globalContext = useContext(GlobalContext);
+  const { dayOfCalendar } = useContext(GlobalContext);
+
+  console.log("render calender");
 
   return (
     <div className="container">
@@ -20,7 +22,9 @@ const Calendar = () => {
           })}
         </div>
 
-        <Month dayOfCalendar={globalContext?.dayOfCalendar} />
+        <Month dayOfCalendar={dayOfCalendar} />
+
+        {/* Modal event detail */}
       </div>
     </div>
   );

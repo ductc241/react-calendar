@@ -1,13 +1,15 @@
-import moment from "moment";
-import Calendar from "./components/Calendar";
-import GlobalContextProvider from "./context/Provider";
-import "./index.scss";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Application from "./modules/Application";
 
 const App = () => {
   return (
-    <GlobalContextProvider>
-      <Calendar />
-    </GlobalContextProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="react-calendar">
+          <Route index path="" element={<Application />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
