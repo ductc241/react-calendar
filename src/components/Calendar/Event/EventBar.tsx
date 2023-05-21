@@ -4,21 +4,23 @@ import moment from "moment";
 
 interface IEventProps {
   event: IEvent;
-  eventList: IEvent[];
+  eventSortedList: IEvent[];
 }
 
-const EventBar = ({ event, eventList }: IEventProps) => {
+const EventBar = ({ event, eventSortedList }: IEventProps) => {
+  // ⚠ dont use title to filter event, use id to handle this
+  const orderEvent = eventSortedList.findIndex(x => x.title === event.title);
+
+  // totalDayOfEvent use to calculate width of event
+  const totalDayOfEvent = moment(event.end_date).diff(moment(event.start_date), "days") + 1;
+
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     console.log("show event detail");
   };
 
-  const orderEvent = eventList.findIndex(x => x.title === event.title);
-  // ⚠ dont use title to filter event, use id to handle this
-
-  const totalDayOfEvent = moment(event.end_date).diff(moment(event.start_date), "days") + 1;
-
   const handleDragStart = (e: DragEvent<HTMLDivElement>, event: IEvent) => {
+    console.log("start");
     e.dataTransfer.setData("eventDrag", JSON.stringify(event));
   };
 

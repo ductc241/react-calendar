@@ -8,8 +8,6 @@ interface IMonthProps {
 }
 
 const Month = ({ dayOfCalendar }: IMonthProps) => {
-  console.log("render month");
-
   return (
     <div className="calendar-month">
       {/* render weeks in a month */}

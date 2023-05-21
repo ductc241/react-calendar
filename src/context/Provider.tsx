@@ -17,7 +17,7 @@ const eventDefault: IEvent[] = [
   {
     title: "🚄 Go to Ho Chi Minh City",
     start_date: "2023-05-03",
-    end_date: "2023-05-05",
+    end_date: "2023-05-04",
     label: "blue",
   },
 
@@ -35,8 +35,8 @@ const eventDefault: IEvent[] = [
   },
   {
     title: "Relaxing",
-    start_date: "2023-05-02",
-    end_date: "2023-05-05",
+    start_date: "2023-05-05",
+    end_date: "2023-05-07",
     label: "blue",
   },
   {
@@ -57,6 +57,12 @@ const eventDefault: IEvent[] = [
     end_date: "2023-05-17",
     label: "blue",
   },
+  {
+    title: "Traveling",
+    start_date: "2023-05-05",
+    end_date: "2023-05-05",
+    label: "blue",
+  },
 ];
 
 function GlobalContextProvider({ children }: IGlobalProps) {
@@ -65,6 +71,7 @@ function GlobalContextProvider({ children }: IGlobalProps) {
   //   localStorage.getItem("events") ?? JSON.stringify(eventDefault),
   // );
   const [eventStore, setEventStore] = useState<IEvent[]>(eventDefault);
+  const [isShowCreateModal, setIsShowCreateModal] = useState<boolean>(true);
 
   const dayOfCalendar = useMemo(() => {
     const nestedArrays: any[] = [...Array(5)].map(() => []);
@@ -108,7 +115,10 @@ function GlobalContextProvider({ children }: IGlobalProps) {
         setCurrentMonth,
         dayOfCalendar,
         eventStore,
+        setEventStore,
         handleChangeDateEvent,
+        isShowCreateModal,
+        setIsShowCreateModal,
       }}
     >
       {children}

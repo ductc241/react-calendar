@@ -6,7 +6,6 @@ interface IEventGrid {
 }
 
 const EventGrid = ({ week }: IEventGrid) => {
-  console.log("render event grid of week");
   return (
     <div className="calendar-event-container">
       {week.map((day, index) => (

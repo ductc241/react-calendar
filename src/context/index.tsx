@@ -7,7 +7,10 @@ interface IGlobalContext {
   setCurrentMonth: Dispatch<SetStateAction<number>>;
   dayOfCalendar: any[];
   eventStore: IEvent[];
+  setEventStore: Dispatch<SetStateAction<IEvent[]>>;
   handleChangeDateEvent: (event: IEvent, day: moment.Moment) => void;
+  isShowCreateModal: boolean;
+  setIsShowCreateModal: (state: boolean) => void;
 }
 
 const defaulValue = {
@@ -15,7 +18,10 @@ const defaulValue = {
   setCurrentMonth: (month: number) => {},
   dayOfCalendar: [],
   eventStore: [],
+  setEventStore: (eventList: IEvent[]) => {},
   handleChangeDateEvent: (event: IEvent, day: moment.Moment) => {},
+  isShowCreateModal: false,
+  setIsShowCreateModal: (state: boolean) => {},
 } as IGlobalContext;
 
 const GlobalContext = createContext<IGlobalContext>(defaulValue);

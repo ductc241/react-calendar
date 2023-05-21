@@ -7,10 +7,8 @@ interface IDayProps {
 
 const Day = ({ day }: IDayProps) => {
   const handleCreateEvent = (e: MouseEvent<HTMLDivElement>) => {
-    console.log("click day");
+    console.log(day.format("DD-MM-YYYY"));
   };
-
-  console.log("render day");
 
   return (
     <div className="calendar-day" onClick={e => handleCreateEvent(e)}>
