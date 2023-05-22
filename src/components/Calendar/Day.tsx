@@ -1,13 +1,17 @@
 import clsx from "clsx";
 import moment from "moment";
-import { MouseEvent } from "react";
+import { MouseEvent, useContext } from "react";
+import GlobalContext from "../../context";
 interface IDayProps {
   day: moment.Moment;
 }
 
 const Day = ({ day }: IDayProps) => {
+  const { setIsShowCreateModal, setSelectedDate } = useContext(GlobalContext);
+
   const handleCreateEvent = (e: MouseEvent<HTMLDivElement>) => {
-    console.log(day.format("DD-MM-YYYY"));
+    setIsShowCreateModal(true);
+    setSelectedDate(day.format("YYYY-MM-DDThh:mm"));
   };
 
   return (

@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import Month from "./Month";
 import GlobalContext from "../../context";
 import Modal from "../Modal";
@@ -14,15 +14,28 @@ interface IFormInput {
 }
 
 const Calendar = () => {
-  const { dayOfCalendar, eventStore, setEventStore, isShowCreateModal, setIsShowCreateModal } =
-    useContext(GlobalContext);
+  const {
+    dayOfCalendar,
+    eventStore,
+    setEventStore,
+    isShowCreateModal,
+    setIsShowCreateModal,
+    selectedDate,
+  } = useContext(GlobalContext);
 
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm<IFormInput>();
+    getValues,
+    setValue,
+  } = useForm<IFormInput>({
+    values: {
+      time: selectedDate,
+      title: "",
+    },
+  });
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
     const isDuplicate = eventStore.find(event => event.title === data.title);
@@ -45,6 +58,7 @@ const Calendar = () => {
       },
     ]);
     setIsShowCreateModal(false);
+    setValue("title", "");
   };
 
   return (

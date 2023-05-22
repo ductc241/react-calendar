@@ -5,12 +5,19 @@ import moment from "moment";
 interface IGlobalContext {
   currentMonth: number;
   setCurrentMonth: Dispatch<SetStateAction<number>>;
+
   dayOfCalendar: any[];
+
   eventStore: IEvent[];
   setEventStore: Dispatch<SetStateAction<IEvent[]>>;
-  handleChangeDateEvent: (event: IEvent, day: moment.Moment) => void;
+
   isShowCreateModal: boolean;
   setIsShowCreateModal: (state: boolean) => void;
+
+  selectedDate: string | string;
+  setSelectedDate: Dispatch<SetStateAction<string | string>>;
+
+  handleChangeDateEvent: (event: IEvent, day: moment.Moment) => void;
 }
 
 const defaulValue = {
@@ -22,6 +29,8 @@ const defaulValue = {
   handleChangeDateEvent: (event: IEvent, day: moment.Moment) => {},
   isShowCreateModal: false,
   setIsShowCreateModal: (state: boolean) => {},
+  selectedDate: "",
+  setSelectedDate: (date: string | string) => {},
 } as IGlobalContext;
 
 const GlobalContext = createContext<IGlobalContext>(defaulValue);

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import CloseIcon from "./Icons/CloseIcon";
 import clsx from "clsx";
 import useScrollLock from "../hooks/useLocker";
@@ -10,7 +10,14 @@ interface IModalProps {
 }
 
 const Modal = ({ title, open = true, children }: IModalProps) => {
-  useScrollLock();
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+      return;
+    } else {
+      document.body.style.overflow = "visible";
+    }
+  }, [open]);
 
   return (
     <div className={clsx("modal", open === false && "modal-hidden")}>

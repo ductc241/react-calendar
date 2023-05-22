@@ -67,11 +67,12 @@ const eventDefault: IEvent[] = [
 
 function GlobalContextProvider({ children }: IGlobalProps) {
   const [currentMonth, setCurrentMonth] = useState<number>(moment().month());
+  const [selectedDate, setSelectedDate] = useState<string>("");
   // const eventStore: IEvent[] = JSON.parse(
   //   localStorage.getItem("events") ?? JSON.stringify(eventDefault),
   // );
   const [eventStore, setEventStore] = useState<IEvent[]>(eventDefault);
-  const [isShowCreateModal, setIsShowCreateModal] = useState<boolean>(true);
+  const [isShowCreateModal, setIsShowCreateModal] = useState<boolean>(false);
 
   const dayOfCalendar = useMemo(() => {
     const nestedArrays: any[] = [...Array(5)].map(() => []);
@@ -119,6 +120,8 @@ function GlobalContextProvider({ children }: IGlobalProps) {
         handleChangeDateEvent,
         isShowCreateModal,
         setIsShowCreateModal,
+        selectedDate,
+        setSelectedDate,
       }}
     >
       {children}
